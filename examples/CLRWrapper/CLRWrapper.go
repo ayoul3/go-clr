@@ -30,7 +30,7 @@ func main() {
 	}
 	runtime.KeepAlive(exebytes)
 
-	ret2, err := clr.ExecuteByteArray(exebytes, []string{"test", "test2"})
+	ret2, err := clr.ExecuteByteArray("v4", exebytes, []string{"test", "test2"})
 	if err != nil {
 		log.Fatal(err)
 	}

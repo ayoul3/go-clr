@@ -107,7 +107,7 @@ func ExecuteDLLFromDisk(dllpath, typeName, methodName, argument string) (retCode
 // ExecuteByteArray is a wrapper function that will automatically load the latest supported framework into the current
 // process using the legacy APIs, then load and execute an executable from memory. It takes in a byte array of the
 // executable to load and run and returns the return code. It currently does not support any arguments on the entry point
-func ExecuteByteArray(rawBytes []byte, params []string) (retCode int32, err error) {
+func ExecuteByteArray(targetRuntime string, rawBytes []byte, params []string) (retCode int32, err error) {
 	retCode = -1
 	metahost, err := GetICLRMetaHost()
 	if err != nil {
@@ -120,7 +120,7 @@ func ExecuteByteArray(rawBytes []byte, params []string) (retCode int32, err erro
 	}
 	var latestRuntime string
 	for _, r := range runtimes {
-		if strings.Contains(r, "v4") {
+		if strings.Contains(r, targetRuntime) {
 			latestRuntime = r
 			break
 		} else {
